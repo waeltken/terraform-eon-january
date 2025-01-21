@@ -1,0 +1,2 @@
+region = "germanywestcentral"
+stage  = "dev"

@@ -14,18 +14,19 @@ resource "azurerm_resource_group" "default" {
   tags = merge(local.default_tags, var.additional_tags)
 }
 
-resource "azurerm_storage_account" "default" {
-  resource_group_name      = azurerm_resource_group.default.name
-  location                 = var.region
-  name                     = "eonsjanuarysa"
-  account_tier             = "Standard"
-  account_replication_type = var.stage == "prod" ? "GRS" : "LRS"
+module "storage" {
+  source = "./modules/blob_storage"
 
-  tags = local.default_tags
+  location             = var.region
+  resource_group_name  = azurerm_resource_group.default.name
+  storage_account_name = "eonsjanuarysadev"
 }
 
-resource "azurerm_storage_container" "tfstate" {
-  name                  = "tfstate"
-  container_access_type = "private"
-  storage_account_id    = azurerm_storage_account.default.id
+module "storage2" {
+  source = "./modules/blob_storage"
+
+  location             = var.region
+  resource_group_name  = azurerm_resource_group.default.name
+  storage_account_name = "eonsjanuarysadev2"
 }
+

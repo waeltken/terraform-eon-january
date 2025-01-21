@@ -1,17 +1,3 @@
-terraform {
-  backend "azurerm" {
-    resource_group_name  = "eon-january-prod-rg"
-    storage_account_name = "eonsjanuarysa"
-    container_name       = "tfstate"
-    key                  = "terraform.tfstate"
-  }
-}
-
-provider "azurerm" {
-  subscription_id = "685dc6df-f715-40c9-91f3-ecf0aea044bd"
-  features {}
-}
-
 locals {
   resource_group_name = "eon-january-${var.stage}-rg"
   default_tags = {

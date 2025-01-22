@@ -29,18 +29,3 @@ module "storage2" {
   resource_group_name  = azurerm_resource_group.default.name
   storage_account_name = "eonsjanuarysadev2"
 }
-
-resource "azurerm_virtual_network" "capture" {
-  name                = "default-vnet"
-  location            = var.region
-  resource_group_name = azurerm_resource_group.default.name
-  address_space       = ["10.0.0.0/16"]
-
-  encryption {
-    enforcement = "AllowUnencrypted"
-  }
-
-  tags = {
-    "owner" = "Clemens Wältken"
-  }
-}
